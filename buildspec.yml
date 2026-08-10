@@ -3,7 +3,7 @@ phases:
   pre_build:
     commands:
       - mvn clean test
-      - mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar "-Dsonar.projectKey=Code" "-Dsonar.projectName='Code'" "-Dsonar.host.url=http://sonarqube_host:9000" "-Dsonar.token=sonarqube_token"
+      - mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar "-Dsonar.projectKey=project_key" "-Dsonar.projectName='project_name'" "-Dsonar.host.url=http://sonarqube_host:9000" "-Dsonar.token=sonarqube_token"
       - mvn clean package
       - echo now login into AWS ECR
       - REPOSITORY_URI= AWS_REPOSITORY_URI
