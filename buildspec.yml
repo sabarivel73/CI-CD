@@ -3,10 +3,10 @@ phases:
   pre_build:
     commands:
       - mvn clean test
-      - mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar "-Dsonar.projectKey=Code" "-Dsonar.projectName='Code'" "-Dsonar.host.url=http://ec2-13-204-83-115.ap-south-1.compute.amazonaws.com:8080" "-Dsonar.token=sqp_2da733ddc71c6d5120ccfd874f757c619ee0f7ef"
+      - mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar "-Dsonar.projectKey=Code" "-Dsonar.projectName='Code'" "-Dsonar.host.url=http://sonarqube_host:9000" "-Dsonar.token=sonarqube_token"
       - mvn clean package
       - echo now login into AWS ECR
-      - REPOSITORY_URI=696263047337.dkr.ecr.ap-south-1.amazonaws.com/server
+      - REPOSITORY_URI= AWS_REPOSITORY_URI
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $REPOSITORY_URI
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
@@ -21,6 +21,11 @@ phases:
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - printf '[{"name":"sample_cicd","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
+reports:
+  junit-reports:
+    files:
+      - target/surefire-reports/*.xml
+    file-format: JUNITXML
 artifacts:
   files:
     - imagedefinitions.json
