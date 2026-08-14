@@ -13,15 +13,13 @@ phases:
   build:
     commands:
       - echo now building the docker image
-#      - docker build -t $REPOSITORY_URI:latest .
+      - docker build -t $REPOSITORY_URI:latest .
 #      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-      - docker build -t backend_CiCd:latest .
   post_build:
     commands:
       - echo now push build image to ECR
-#      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:latest
 #      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - docker push backend_CiCd:latest
       - printf '[{"name":"sample_cicd","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 #reports:
