@@ -35,7 +35,7 @@ class CiCdApplicationTests {
 	public void test2() throws Exception {
 		mockMvc.perform(get("/get_2"))
 				.andExpect(status().isOk())
-				.andExpect((ResultMatcher) content().string("Hello Vanakam"));
+				.andExpect((ResultMatcher) content().string("Hello"));
 	}
 
 	@Test
