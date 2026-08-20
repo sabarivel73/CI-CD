@@ -5,7 +5,7 @@ phases:
 #      - mvn clean test
 #      - mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar "-Dsonar.projectKey=project_key" "-Dsonar.projectName='project_name'" "-Dsonar.host.url=http://sonarqube_host:9000" "-Dsonar.token=sonarqube_token"
       - mvn clean package
-      - echo now login into AWS ECR
+      - echo now login into AWS ECR Service
       - REPOSITORY_URI=696263047337.dkr.ecr.ap-south-1.amazonaws.com/flow_repo
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $REPOSITORY_URI
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
