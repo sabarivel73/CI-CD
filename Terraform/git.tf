@@ -1,4 +1,4 @@
-resource "aws_codestarconnections_connection" "github" {
+resource "aws_codeconnections_connection" "github" {
   name          = "github-connection"
   provider_type = "GitHub"
 }
