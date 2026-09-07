@@ -14,7 +14,7 @@ resource "aws_codepipeline" "backend" {
       name             = "Source"
       category         = "Source"
       owner            = "AWS"
-      provider         = "CodeStarSourceConnection"
+      provider         = "CodeConnections"
       version          = "1"
       output_artifacts = ["source_output"]
 
