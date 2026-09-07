@@ -26,6 +26,6 @@ resource "aws_ecs_service" "backend" {
   }
 
   depends_on = [
-    aws_lb_listener.backend
+    aws_lb_target_group.backend
   ]
 }

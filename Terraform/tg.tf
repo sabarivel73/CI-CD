@@ -4,7 +4,7 @@ resource "aws_lb_target_group" "backend" {
   protocol    = "HTTP"
   target_type = "ip"
 
-  vpc_id = aws_vpc.main.id
+  vpc_id = "vpc_id"
 
   health_check {
     enabled             = true
