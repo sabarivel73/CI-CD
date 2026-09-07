@@ -41,8 +41,21 @@ resource "aws_iam_role_policy" "codepipeline" {
         ]
 
         Resource = "*"
-      }
+      },
 
+      {
+            Effect: "Allow",
+
+            Action: [
+                "codeconnections:GetConnectionToken",
+                "codeconnections:GetConnection",
+                "codeconnections:UseConnection"
+            ]
+
+            Resource: [
+                aws_codeconnections_connection.github.arn
+            ]
+      }
     ]
   })
 }
