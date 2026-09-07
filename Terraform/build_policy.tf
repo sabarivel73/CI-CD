@@ -21,6 +21,18 @@ resource "aws_iam_role_policy" "codebuild_logs" {
         ]
 
         Resource = "*"
+      },
+      {
+              Effect = "Allow"
+
+              Action = [
+                "s3:*"
+              ]
+
+              Resource = [
+                aws_s3_bucket.pipeline_artifacts.arn,
+                "${aws_s3_bucket.pipeline_artifacts.arn}/*"
+              ]
       }
     ]
   })

@@ -14,12 +14,12 @@ resource "aws_codepipeline" "backend" {
       name             = "Source"
       category         = "Source"
       owner            = "AWS"
-      provider         = "CodeConnections"
+      provider         = "CodeStarSourceConnection"
       version          = "1"
       output_artifacts = ["source_output"]
 
       configuration = {
-        ConnectionArn    = var.github_connection_arn
+        ConnectionArn    = aws_codeconnections_connection.github.arn
         FullRepositoryId = "YOUR_USERNAME/YOUR_REPOSITORY"
         BranchName       = "main"
       }
