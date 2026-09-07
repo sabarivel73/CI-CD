@@ -31,19 +31,6 @@ resource "aws_iam_role_policy" "codepipeline" {
       },
 
       {
-        Effect = "Allow"
-
-        Action = [
-          "ecs:DescribeServices",
-          "ecs:DescribeTaskDefinition",
-          "ecs:RegisterTaskDefinition",
-          "ecs:UpdateService"
-        ]
-
-        Resource = "*"
-      },
-
-      {
             Effect: "Allow",
 
             Action: [
@@ -58,4 +45,9 @@ resource "aws_iam_role_policy" "codepipeline" {
       }
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "codepipeline_ecs" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
+  role = aws_iam_role.codepipeline.id
 }
